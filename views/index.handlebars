@@ -1,31 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" href="https://bootswatch.com/journal/bootstrap.css">
-		<link rel="stylesheet" href="./public/assets/css/style.css">
-		<title> Web Scrape App</title>
-	</head>
-	<body>
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="#" class="navbar-brand">Mongo Scrape Away</a>
+<div class="container panel panel-default">
+    {{#each products }}
+    <div class="products">
+        <h3 class="name">{{name}}</h3>
+        <p><a href="{{link}}" target="_blank" class="readproduct">View Product</a></p>
+        <div>
+
+            <h5>Comments</h5>
+            {{#each comments}}
+            <div class="comments">
+                <div data-comment-id="{{this._id}}" class="btn btn-xs btn-danger">x</div>
+                {{this.text}}
             </div>
-            <div class="navbar-collapse collapse" id="navbar-main">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/saved">Saved Product Information</a>
-                    </li>
-                    <li>
-                        <button class="btn btn-info scrape-btn">Scrape New Products</button>
-                    </li>
-                </ul>
-            </div>
+            {{/each}}
+
+            <form action="/comment" method="POST">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Write a comment" name="comment">
+                </div>
+                <div class="form-group">
+                    <input type="hidden" class="form-control" name="{{_id}}">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-sm btn-primary">
+                </div>
+            </form>
+
         </div>
     </div>
-    {{{body}}}
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	</body>
-</html>
+    {{/each}}
+</div>
