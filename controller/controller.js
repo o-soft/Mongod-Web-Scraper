@@ -12,7 +12,7 @@ module.exports = function (app) {
                 res.end();
             }
             else {
-                res.render("index", {Products: found})
+                res.render("index", {products: found})
             }
         })
     });
@@ -24,20 +24,20 @@ module.exports = function (app) {
                 console.log(error)
             }
             var $ = cheerio.load(html);
-              $("div.listings_table_d").each(function(i, element) {
+              $("dl.auctions").each(function(i, element) {
                 // var name = $(element).find('dt.listing_head h3 a ').text().trim();
                 var name = $(element).children("dt.listing_head").children("a").text().trim() + "";
 
                 // var route = $(element).find('dt.listing_head h3 a ').attr("href").trim();
-                var route = $(element).children("dt.listing_head").children("a").attr("href").trim();
+                var link = $(element).children("dt.listing_head").children("a").attr("href");
 
-                // var price = $(element).find('div.datePosted p').text().trim();
-                var price = $(element).children("dl.datePosted").children("dd").children("p").text().trim();
+                var price = $(element).find('div.datePosted p').text().trim();
+                // var price = $(element).children("dl.datePosted").children("dd").children("p").text().trim();
 
-                var link = "https://www.dotmed.com" + route;
+                // var link = "https://www.dotmed.com" + route;
             
-                if (name && price && link) {
-                    var saveProduct = new Product({name: name, price: price, link: link});
+                if (name && link && price) {
+                    var saveProduct = new Product({name: name, link: link, price: price});
                     saveProduct.save(function(error, saved) {
                         if (error) {
                             console.log(error)

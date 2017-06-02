@@ -15,14 +15,15 @@ var ProductSchema = new Schema ({
 		type: String,
 		required: true
 	},
+	
 	price: {
 		type: String,
 		required: true
 	},
   	//Create a relationship with Comment Model
-  	comments: [{
+  	comment: [{
   		type: Schema.Types.ObjectId,
-  		ref: "Comments"
+  		ref: "Comment"
   	}]
 
 });
