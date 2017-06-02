@@ -25,14 +25,14 @@ module.exports = function (app) {
             }
             var $ = cheerio.load(html);
               $("div.listings_table_d").each(function(i, element) {
-                var name = $(element).find('dt.listing_head h3 a ').text().trim();
-                // result.name = $(element).children("dt.listing_head").children("a").text().trim() + "";
+                // var name = $(element).find('dt.listing_head h3 a ').text().trim();
+                var name = $(element).children("dt.listing_head").children("a").text().trim() + "";
 
-                var route = $(element).find('dt.listing_head h3 a ').attr("href").trim();
-                // result.link = $(element).children("dt.listing_head").children("a").attr("href").trim();
+                // var route = $(element).find('dt.listing_head h3 a ').attr("href").trim();
+                var route = $(element).children("dt.listing_head").children("a").attr("href").trim();
 
-                var price = $(element).find('div.datePosted p').text().trim();
-                // $(element).children("dl.datePosted").children("dd").children("p").text().trim();
+                // var price = $(element).find('div.datePosted p').text().trim();
+                var price = $(element).children("dl.datePosted").children("dd").children("p").text().trim();
 
                 var link = "https://www.dotmed.com" + route;
             
