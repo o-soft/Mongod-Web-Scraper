@@ -27,7 +27,7 @@ app.use(express.static('public'));
 // Database configuration with mongoose
 // mongoose.connect("mongodb://");
 //db: productScrape
-mongoose.connect("mongodb://localhost/product-scrape");
+mongoose.connect(process.env.uri);
 var db = mongoose.connection;
 
 // Show any mongoose errors
